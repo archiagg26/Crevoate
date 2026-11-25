@@ -1,0 +1,203 @@
+html {
+  scroll-behavior: smooth;
+}
+main section[id] {
+  scroll-margin-top: 8.5rem;
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.topbar:has(.homepage-jump) {
+  box-shadow: 0 2px 8px #261f2b13;
+}
+.homepage-jump {
+  display: flex;
+  gap: clamp(0.55rem, 2vw, 1.5rem);
+  overflow: auto;
+  scrollbar-width: thin;
+  padding-block: 0.4rem;
+  border-top: 1px solid #ddd4d3;
+}
+.homepage-jump a {
+  flex: none;
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 0.25rem 0.4rem;
+  border-radius: 4px;
+}
+.homepage-jump a[aria-current="location"] {
+  background: #ebe0ff;
+  color: #48258e;
+}
+.scroll-progress {
+  height: 3px;
+  background: #7047eb;
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  transform-origin: left;
+  scale: 0 1;
+}
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-meter linear both;
+    animation-timeline: scroll(root block);
+  }
+  @keyframes scroll-meter {
+    to {
+      scale: 1 1;
+    }
+  }
+}
+.account-toggle {
+  max-width: min(19rem, 45vw);
+}
+.account-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.account-avatar {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background: #eadbff;
+  color: #362061;
+  font-size: 0.72rem;
+  overflow: hidden;
+}
+.account-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.unread-count {
+  font-size: 0.71rem;
+  border-radius: 1rem;
+  background: #5b31c5;
+  color: white;
+  padding: 0.14rem 0.32rem;
+}
+.account-menu .nav-panel {
+  left: auto;
+  right: 0;
+}
+.account-menu .nav-panel > button {
+  text-align: left;
+  padding: 0.5rem;
+}
+.viewport-text-mask,
+.viewport-text {
+  display: block;
+}
+.viewport-text-mask {
+  overflow: clip;
+  overflow-clip-margin: 3px;
+  padding-block: 0.035em;
+  margin-block: -0.035em;
+}
+.viewport-line {
+  transform-origin: left center;
+}
+.viewport-image {
+  width: 100%;
+  height: 100%;
+}
+.service-visual > .viewport-image {
+  display: grid;
+  place-items: center;
+}
+.process-options {
+  position: relative;
+  border-top: 0;
+}
+.process-connector {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  background: #8b7a8d;
+  pointer-events: none;
+}
+.viewport-tool-inner {
+  display: grid;
+  gap: 0.7rem;
+}
+.showcases .feature > .viewport-reveal:last-child {
+  margin-top: auto;
+}
+.work-link .art img {
+  scale: 1.06;
+  transition: scale 0.44s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.work-link:is(:hover, :focus-visible) .art img {
+  scale: 1.13;
+}
+.work-link > div:last-child svg,
+.button svg {
+  transition: transform 0.22s ease;
+}
+.work-link:is(:hover, :focus-visible) > div:last-child svg,
+.button:is(:hover, :focus-visible) svg {
+  transform: translate(2px, -2px);
+}
+[data-reveal-state="entered"] :is(.creative-doodle, .process-options svg) path,
+.process-options [data-reveal-state="entered"] svg path {
+  stroke-dasharray: 150 0;
+  animation: viewport-doodle 0.85s ease-out both;
+  animation-delay: var(--reveal-delay, 0s);
+}
+@keyframes viewport-doodle {
+  from {
+    stroke-dasharray: 0 150;
+  }
+  to {
+    stroke-dasharray: 150 0;
+  }
+}
+#creative-tools {
+  overflow: clip;
+  overflow-clip-margin: 4px;
+}
+@media (max-width: 1120px) {
+  .account-toggle {
+    max-width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .viewport-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  .work-link .viewport-parallax,
+  .work-link:is(:hover, :focus-visible) .viewport-parallax {
+    transform: none !important;
+    scale: 1;
+  }
+  [data-reveal-state="entered"]
+    :is(.creative-doodle, .process-options svg)
+    path,
+  .process-options [data-reveal-state="entered"] svg path,
+  .scroll-progress {
+    animation: none;
+  }
+}
+
+.showcases .viewport-tool-inner {
+  flex: 1;
+}
+.showcases .viewport-tool-inner > :last-child {
+  align-self: end;
+}
+.hero-image-reveal {
+  border-radius: 8px;
+}
